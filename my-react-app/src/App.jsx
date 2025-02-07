@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import JSConfetti from "js-confetti";
 import "./App.css";
-import { Button, Form, Input, Avatar } from "@heroui/react";
-import { NavLink, Link } from "react-router";
+import { Button, Form, Input } from "@heroui/react";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   const [name, setName] = useState("");
   const [validated, setValidated] = useState(false);
   const [show, setShow] = useState(false);
@@ -16,67 +13,76 @@ function App() {
 
   const submit = (e) => {
     e.preventDefault();
-
     if (name.toLowerCase() === "hazel may costo cerafica") {
-      console.log("Hello, " + name);
       setValidated(true);
     } else {
-      console.log("You are not hazel may costo cerafica");
       setShowError(true);
       setTimeout(() => {
         setShowError(false);
-      }, 5000);
+      }, 3000);
     }
   };
 
-  const showVoucher = () => {
-    setShow(true);
-  };
+  const showVoucher = () => setShow(true);
+  const handleClaim = () => jsConfetti.addConfetti();
 
-  const handleClaim = () => {
-    jsConfetti.addConfetti();
-  };
-
-  const SecondPage = () => {
+  const ValentinePage = () => {
     return (
-      <div className="flex flex-col gap-4 ">
-        {!show && (
-          <div className="flex flex-col gap-4 justify-center items-center">
-            <h1 className="text-lg font-bold  text-red-500  ">
-              Will you Be My Valentine Babb? 🙏
+      <div className="max-w-2xl mx-auto p-8 rounded-2xl shadow-lg bg-white">
+        {!show ? (
+          <div className="flex flex-col items-center gap-8">
+            <h1 className="text-3xl font-bold text-red-500 text-center animate-pulse">
+              Will you be my Valentine? 💝
             </h1>
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <Button
                 onPress={() => {
                   showVoucher();
                   handleClaim();
                 }}
                 color="success"
-                variant="flat"
+                variant="shadow"
+                size="lg"
+                className="px-12 py-6 text-lg"
               >
-                Yes
+                Yes! 💖
               </Button>
-              <Button isDisabled color="danger" variant="flat">
+              <Button
+                isDisabled
+                color="danger"
+                variant="flat"
+                size="lg"
+                className="px-12 py-6 text-lg opacity-50"
+              >
                 No
               </Button>
             </div>
           </div>
-        )}
-
-        {show && (
-          <div className="flex flex-col justify-center items-center gap-4">
-            <h1 className="text-lg font-bold text-center  text-red-500  ">
-              Congratulations on choosing me as your Valentine. Here is your
-              voucher hihi.
-            </h1>
-            <h1 className="text-lg font-bold  text-red-500 text-center">
-              Iloveyouuu my Loveeyyyy 😘💋
-            </h1>
-            <div className="w-full flex justify-center items-center ">
-              <img src="/voucher.png" alt="Voucher" height={500} width={500} />
+        ) : (
+          <div className="flex flex-col items-center gap-8">
+            <div className="space-y-4 text-center">
+              <h1 className="text-2xl font-bold text-red-500">
+                Thank you for being my Valentine! 💑
+              </h1>
+              <p className="text-xl text-red-400">
+                Here's a special gift just for you
+              </p>
             </div>
-            <Button color="success" variant="bordered" onPress={handleClaim}>
-              Claim
+            <div className="relative w-full  max-w-md rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
+              <img
+                src="/voucher.png"
+                alt="Valentine's Voucher"
+                className="object-cover "
+              />
+            </div>
+            <Button
+              color="success"
+              variant="shadow"
+              size="lg"
+              onPress={handleClaim}
+              className="px-8 py-4"
+            >
+              Claim Your Gift 🎁
             </Button>
           </div>
         )}
@@ -85,27 +91,54 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      {validated ? (
-        <SecondPage />
-      ) : (
-        <Form onSubmit={submit} className="w-96">
-          <label>Enter Full Name</label>
-          <Input
-            type="text"
-            placeholder="Eg. Juan Dela Marta Cruz"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          {showError && (
-            <p className="text-red-500 animate-bounce">Invalid name</p>
-          )}
-          {/* <label htmlFor="name">Name</label> */}
-          <Button type="submit" color="primary">
-            Submit
-          </Button>
-        </Form>
-      )}
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-red-50 p-4 flex justify-center items-center">
+      <div className="max-w-4xl mx-auto">
+        {validated ? (
+          <ValentinePage />
+        ) : (
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="flex flex-col items-center gap-6">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Shopee_logo.svg/1442px-Shopee_logo.svg.png"
+                alt="Shopee Logo"
+                className="w-20 h-30 object-cover"
+              />
+              <h1 className="text-3xl font-bold text-center bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text">
+                Claim Your Exclusive Shopee Voucher
+              </h1>
+              <Form onSubmit={submit} className="w-full max-w-md space-y-4">
+                <div className="space-y-2 w-full">
+                  <label className="text-sm font-medium text-gray-700">
+                    Please Enter Your Full Name
+                  </label>
+                  <Input
+                    type="text"
+                    placeholder="Enter your full name here"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full !min-w-full"
+                    size="lg"
+                  />
+                  {showError && (
+                    <p className="text-red-500 text-sm animate-bounce">
+                      Please enter a valid name
+                    </p>
+                  )}
+                </div>
+                <Button
+                  type="submit"
+                  color="primary"
+                  size="lg"
+                  className="w-full"
+                  variant="shadow"
+                >
+                  Verify & Continue
+                </Button>
+              </Form>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
