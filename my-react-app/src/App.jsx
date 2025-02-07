@@ -65,8 +65,9 @@ function App() {
                 Thank you for being my Valentine! 💑
               </h1>
               <p className="text-xl text-red-400">
-                Here's a special gift just for you
+                Here's a special gift just for you My Love!
               </p>
+              <p className=" text-red-400 text-sm">I &lt;3 You Babb 💋</p>
             </div>
             <div className="relative w-full  max-w-md rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow">
               <img
