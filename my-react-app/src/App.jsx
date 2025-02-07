@@ -65,7 +65,7 @@ function App() {
 
         {show && (
           <div className="flex flex-col justify-center items-center gap-4">
-            <h1 className="text-lg font-bold  text-red-500  ">
+            <h1 className="text-lg font-bold text-center  text-red-500  ">
               Congratulations on choosing me as your Valentine. Here is your
               voucher hihi.
             </h1>
