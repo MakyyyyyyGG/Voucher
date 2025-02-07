@@ -93,7 +93,7 @@ function App() {
           <label>Enter Full Name</label>
           <Input
             type="text"
-            placeholder="Eg. Juan Dela Cruz"
+            placeholder="Eg. Juan Dela Marta Cruz"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
